@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Flunt.Notifications;
+using Microsoft.EntityFrameworkCore;
 using ProductCatalog.Maps;
 using ProductCatalog.Models;
-using System;
 
 namespace ProductCatalog.Data
 {
@@ -17,8 +17,8 @@ namespace ProductCatalog.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.ApplyConfiguration(new CategoryMap());
             builder.ApplyConfiguration(new ProductMap());
+            builder.ApplyConfiguration(new CategoryMap());
         }
     }
 }

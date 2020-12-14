@@ -2,6 +2,7 @@
 using ProductCatalog.Data;
 using ProductCatalog.Models;
 using ProductCatalog.Repositories;
+using ProductCatalog.Repositories.Interfaces;
 using ProductCatalog.ViewModels;
 using ProductCatalog.ViewModels.ProductViewModels;
 using System;
@@ -11,9 +12,9 @@ namespace ProductCatalog.Controllers
 {
     public class ProductController : Controller
     {
-        private readonly ProductRepository _repo;
+        private readonly IProductRepository _repo;
 
-        public ProductController(ProductRepository repository)
+        public ProductController(IProductRepository repository)
         {
             _repo = repository;
         }
@@ -36,15 +37,6 @@ namespace ProductCatalog.Controllers
         [HttpPost]
         public ResultViewModel Post([FromBody]EditorProductViewModel model)
         {
-            model.Validate();
-            if (model.Invalid)
-                return new ResultViewModel
-                {
-                    Success = false,
-                    Message = "Não foi possível inserir o produto",
-                    Data = model.Notifications
-                };
-
             var prod = new Product();
             prod.Title = model.Title;
             prod.CategoryId = model.CategoryId;

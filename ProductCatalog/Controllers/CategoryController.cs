@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProductCatalog.Models;
 using ProductCatalog.Repositories;
+using ProductCatalog.Repositories.Interfaces;
 using ProductCatalog.ViewModels;
 using System.Collections.Generic;
 
@@ -8,9 +9,9 @@ namespace ProductCatalog.Controllers
 {
     public class CategoryController : Controller 
     {
-        public readonly CategoryRepository _repo;
+        public readonly ICategoryRepository _repo;
 
-        public CategoryController(CategoryRepository repository)
+        public CategoryController(ICategoryRepository repository)
         {
             _repo = repository;
         }
@@ -40,15 +41,6 @@ namespace ProductCatalog.Controllers
         [HttpPost]
         public ResultViewModel Post([FromBody]Category category)
         {
-            category.Validate();
-            if(category.Invalid)
-                return new ResultViewModel
-                {
-                    Success = false,
-                    Message = "Save Category was failed",
-                    Data = category.Notifications
-                };
-
             _repo.Save(category);
 
             return new ResultViewModel
@@ -63,15 +55,6 @@ namespace ProductCatalog.Controllers
         [HttpPut]
         public ResultViewModel Put([FromBody]Category category)
         {
-            category.Validate();
-            if (category.Invalid)
-                return new ResultViewModel
-                {
-                    Success = false,
-                    Message = "Update Category was failed",
-                    Data = category.Notifications
-                };
-
             _repo.Update(category);
 
             return new ResultViewModel

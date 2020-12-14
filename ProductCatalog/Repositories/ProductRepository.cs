@@ -1,13 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ProductCatalog.Data;
 using ProductCatalog.Models;
+using ProductCatalog.Repositories.Interfaces;
 using ProductCatalog.ViewModels.ProductViewModels;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace ProductCatalog.Repositories
 {
-    public class ProductRepository
+    public class ProductRepository : IProductRepository
     {
         private readonly StoreDataContext _context;
 

@@ -1,10 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using ProductCatalog.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ProductCatalog.Maps
 {
@@ -15,9 +11,7 @@ namespace ProductCatalog.Maps
             builder.ToTable("Category");
 
             builder.HasKey(x => x.Id);
-            builder.Property(x => x.Title).HasMaxLength(120).HasColumnType("varchar(120)");
-
-            /*builder.has*/
+            builder.Property(x => x.Title).HasMaxLength(120).HasColumnType("varchar(120)"); 
         }
     }
 }
